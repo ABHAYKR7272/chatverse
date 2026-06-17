@@ -19,10 +19,19 @@ function setStore(store) {
 // Proxy object so existing `const store = require('../utils/store')` call sites
 // always hit the *current* active store, even if it's swapped after import time.
 const proxy = new Proxy({}, {
-  get(_target, prop) {
+  get(target, prop) {
+
+    // Proxy ke apne methods pehle return karo
+    if (prop in target) {
+      return target[prop];
+    }
+
     const store = getStore();
     const value = store[prop];
-    return typeof value === 'function' ? value.bind(store) : value;
+
+    return typeof value === 'function'
+      ? value.bind(store)
+      : value;
   }
 });
 
