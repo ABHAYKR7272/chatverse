@@ -26,6 +26,8 @@ const proxy = new Proxy({}, {
   }
 });
 
+proxy.setStore = setStore;
+proxy.getStore = getStore;
+
 module.exports = proxy;
-module.exports.__setStore = setStore;
 module.exports.__isMongo = () => mongoose.connection.readyState === 1;
