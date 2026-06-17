@@ -20,7 +20,7 @@ const connectDB = async () => {
 
     // Switch active store to MongoDB-backed implementation
     const mongoStore = require('../utils/mongoStore');
-    storeSwitcher.__setStore(mongoStore);
+    storeSwitcher._setStore(mongoStore);
     console.log('💾 Storage: MongoDB (Persistent)');
 
     return conn;
